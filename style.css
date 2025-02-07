@@ -1,0 +1,146 @@
+/* Smooth transition effects */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #ffdde1;
+    transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dark mode */
+.dark-mode {
+    background: #222;
+    color: white;
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+/* Title Styling */
+.title {
+    font-size: 2em;
+    margin-top: 50px;
+}
+
+/* Daily Quote */
+#quoteContainer {
+    font-size: 1.5em;
+    font-style: italic;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Floating Hearts */
+@keyframes floatHearts {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(60deg); opacity: 0; }
+}
+
+.heart {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: floatHearts 5s linear infinite;
+    opacity: 0.8;
+}
+
+/* Love Letter Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.show-modal {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Virtual Hug Button */
+@keyframes hugShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+.hugging {
+    animation: hugShake 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.5em;
+        margin-top: 30px;
+    }
+
+    #quoteContainer {
+        font-size: 1.2em;
+        margin-top: 15px;
+    }
+
+    #themeToggle {
+        font-size: 1.2em;
+    }
+
+    .modal {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.2em;
+        margin-top: 20px;
+    }
+
+    #quoteContainer {
+        font-size: 1em;
+        margin-top: 10px;
+    }
+
+    #themeToggle {
+        font-size: 1em;
+    }
+
+    .modal {
+        width: 95%;
+        padding: 10px;
+    }
+}
+
+/* Center the image container */
+#imagesContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto; /* Add a little space but avoid too much */
+}
+
+/* Style the images */
+#imagesContainer img {
+    max-width: 500px; /* Set a reasonable size */
+    height: auto;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: opacity 0.5s ease-in-out;
+}

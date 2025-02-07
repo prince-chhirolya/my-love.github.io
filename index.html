@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Love for You ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Theme Switcher -->
+    <button id="themeToggle">🌙</button>
+
+    <!-- Falling Hearts -->
+    <div id="heartsContainer"></div>
+
+    <!-- Love Message -->
+    <h1 class="title">My Love, You Are My Everything 💖</h1>
+
+    <!-- Images Section -->
+    <div id="imagesContainer">
+        <img id="firstImage" src="rose-for-my-love.png" alt="Rose for my love" style="display: block;">
+        <img id="secondImage" src="baby-bubu.png" alt="Baby & Bubu" style="display: none;">
+    </div>
+
+    <script>
+        document.getElementById('firstImage').addEventListener('click', function () {
+            document.getElementById('firstImage').style.display = 'none';
+            document.getElementById('secondImage').style.display = 'block';
+        });
+    </script>
+
+    <!-- Daily Love Quote -->
+    <div id="quoteContainer">
+        <p id="loveQuote">You are my sunshine, my only sunshine!</p>
+    </div>
+
+    <!-- Love Letter Section -->
+    <button id="openLetter">💌 Open My Love Letter</button>
+    <div id="letterModal" class="modal">
+        <div class="modal-content">
+            <span id="closeLetter">&times;</span>
+            <h2>To My Love 💕</h2>
+            <p>You make my life so beautiful. Every moment with you is magical. I love you endlessly! 💖</p>
+        </div>
+    </div>
+
+    <!-- Virtual Hug Button -->
+    <button id="hugButton">Please, hug me like this 🤗</button>
+
+    <!-- Background Music Play/Pause Button -->
+    <button id="musicToggle">🎵 Play Music</button>
+
+   
+    <script src="script.js"></script>
+</body>
+
+</html>
