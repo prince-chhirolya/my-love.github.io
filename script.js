@@ -210,7 +210,7 @@ function startGame1() {
 }
 
 function startGame2() {
-    alert("Game 2 coming soon! 🎮");
+    window.location.href = "games/spell-caster-game/index.html";
 }
 
 function startGame3() {
