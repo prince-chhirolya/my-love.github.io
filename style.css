@@ -144,3 +144,46 @@ body {
     border-radius: 10px;
     transition: opacity 0.5s ease-in-out;
 }
+
+/* Game Zone */
+#gameZone {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Game Buttons */
+.gameButton {
+    background: linear-gradient(135deg, #ff4081, #ff6699);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 18px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 102, 153, 0.4);
+    width: 220px;
+    text-align: center;
+}
+
+/* Hover Effects */
+.gameButton:hover {
+    background: linear-gradient(135deg, #ff6699, #ff4081);
+    transform: scale(1.15);
+    box-shadow: 0 0 20px #ff99c8;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .gameButton {
+        font-size: 16px;
+        padding: 15px 20px;
+        width: 180px;
+    }
+}
