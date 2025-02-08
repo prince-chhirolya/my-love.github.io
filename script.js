@@ -179,43 +179,48 @@ window.addEventListener("load", function() {
     }).catch((error) => {
         console.log("Autoplay was prevented:", error);
     });
-
-    // Start music on click anywhere
-    document.body.addEventListener("click", function() {
-        if (bgMusic.paused) {
-            bgMusic.play();
-            document.getElementById("musicToggle").innerText = "⏸ Pause Music";
-        }
-    });
-
-    // Start music on scroll
-    window.addEventListener("scroll", function() {
-        if (bgMusic.paused) {
-            bgMusic.play().then(() => {
-                document.getElementById("musicToggle").innerText = "⏸ Pause Music";
-            }).catch((error) => {
-                console.log("Autoplay was prevented:", error);
-            });
-        }
-    });
 });
 
-function toggleImages() {
-    const firstImage = document.getElementById('firstImage');
-    const secondImage = document.getElementById('secondImage');
-    if (firstImage.style.display === 'block') {
-        firstImage.style.display = 'none';
-        secondImage.style.display = 'block';
-    } else {
-        firstImage.style.display = 'block';
-        secondImage.style.display = 'none';
-    }
+
+const images = ["firstImage", "secondImage"];
+let currentIndex = 0;
+
+function toggleImage() {
+    document.getElementById(images[currentIndex]).style.display = 'none';
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById(images[currentIndex]).style.display = 'block';
 }
 
-setInterval(toggleImages, 2000);
+document.getElementById(images[0]).addEventListener('click', toggleImage);
+document.getElementById(images[1]).addEventListener('click', toggleImage);
 
-function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight);
+// Add hover effect to images
+images.forEach(imageId => {
+    const imageElement = document.getElementById(imageId);
+    imageElement.style.cursor = 'pointer';
+    imageElement.title = 'Click to change image';
+});
+
+function startGame1() {
+    window.location.href = "games/love-memory-game/index.html";
 }
 
-setInterval(scrollToBottom, 3000);
+function startGame2() {
+    alert("Game 2 coming soon! 🎮");
+}
+
+function startGame3() {
+    alert("Game 3 coming soon! 🎮");
+}
+
+function startGame4() {
+    alert("Game 4 coming soon! 🎮");
+}
+
+function startGame5() {
+    alert("Game 5 coming soon! 🎮");
+}
+
+function startGame6() {
+    alert("Game 6 coming soon! 🎮");
+}

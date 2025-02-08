@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Memory Game 💕</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <audio id="backgroundMusic" loop>
+        <source src="love-song.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1>💕 Love Memory Game 💕</h1>
+    <p>Flip the cards and find the matching hearts! ❤️</p>
+
+    <div class="info-panel">
+        <p>⏳ Time Left: <span id="timer">60</span> sec</p>
+        <p>🎯 Moves: <span id="moves">0</span></p>
+    </div>
+
+    <div class="game-container">
+        <div class="grid-container" id="memory-game"></div>
+    </div>
+
+    <button id="resetButton">🔄 Restart Game</button>
+
+    <div id="winMessage" class="hidden">
+        <h2>🎉 Congratulations, Love! 🎉</h2>
+        <p>You completed the game in <span id="finalMoves">0</span> moves! 💖</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.2/dist/confetti.browser.min.js"></script>
+</body>
+</html>
