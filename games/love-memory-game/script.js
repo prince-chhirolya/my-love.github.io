@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const winMessage = document.getElementById("winMessage");
     const finalMoves = document.getElementById("finalMoves");
     const backgroundMusic = document.getElementById("backgroundMusic");
+    const playMusicButton = document.getElementById("playMusicButton");
+    const heartsContainer = document.getElementById("hearts-container");
 
     let cardsArray = ["❤️", "💖", "💘", "💕", "💞", "💗", "💓", "❣️"];
     let cards = [...cardsArray, ...cardsArray];
@@ -81,28 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function startGame() {
         gameContainer.innerHTML = "";
-        matchedPairs = 0;
-        moves = 0;
-        movesDisplay.textContent = moves;
-        winMessage.style.display = "none";
-
         shuffle(cards).forEach((emoji) => {
             gameContainer.appendChild(createCard(emoji));
         });
-
-        resetTimer();
         startTimer();
-        playMusic();
-    }
-
-    function winGame() {
-        clearInterval(timerInterval);
-        winMessage.style.display = "block";
-        finalMoves.textContent = moves;
-        confettiAnimation();
+        createFallingHearts();
     }
 
     function startTimer() {
+        clearInterval(timerInterval);
         timer = 60;
         timerDisplay.textContent = timer;
         timerInterval = setInterval(() => {
@@ -110,29 +99,30 @@ document.addEventListener("DOMContentLoaded", () => {
             timerDisplay.textContent = timer;
             if (timer === 0) {
                 clearInterval(timerInterval);
-                alert("⏳ Time's up! Try again.");
-                startGame();
             }
         }, 1000);
     }
 
-    function resetTimer() {
-        clearInterval(timerInterval);
-        timerDisplay.textContent = "60";
+    function createFallingHearts() {
+        for (let i = 0; i < 20; i++) {
+            let heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.animationDuration = `${Math.random() * 5 + 3}s`;
+            heart.textContent = "❤️";
+            heartsContainer.appendChild(heart);
+        }
     }
 
-    function playMusic() {
-        backgroundMusic.play();
-    }
-
-    function confettiAnimation() {
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
-        });
-    }
-
+    playMusicButton.addEventListener("click", () => {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+            playMusicButton.innerHTML = "Pause Music &#x23F8;"; // Pause icon
+        } else {
+            backgroundMusic.pause();
+            playMusicButton.innerHTML = "Play Music &#x25B6;"; // Play icon
+        }
+    });
     resetButton.addEventListener("click", startGame);
     startGame();
 });

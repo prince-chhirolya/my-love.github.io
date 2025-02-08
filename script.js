@@ -125,7 +125,6 @@ const songs = [
     { title: "Tumse Milna", url: "music/tumse-milna-bate-karna.mp3" },
     { title: "Tum Se Hi", url: "music/tum-se-hi.mp3" },
     { title: "Tum Jo Aaye", url: "music/tum-jo-aaye.mp3" },
-    { title: "Hua Hai Aaj Pehli", url: "hua-hai-aaj-pehli-baar.mp3" },
     { title: "Tum Hi Ho", url: "music/tum-hi-ho.mp3" },
     { title: "Girl Voice", url: "music/girl-voice.mp3" },
     { title: "Love Me Thoda", url: "music/love-me-thoda.mp3" },
@@ -134,8 +133,20 @@ const songs = [
     { title: "Tere Mast Mast Do Nena", url: "music/tere-mast-mast-do-nena.mp3" } 
 ];
 
-let bgMusic = new Audio(songs[0].url);
+// Select a random song to play automatically
+let randomSongIndex = Math.floor(Math.random() * songs.length);
+let bgMusic = new Audio(songs[randomSongIndex].url);
 bgMusic.loop = true; // Loop the song
+
+// Play the random song automatically after user interaction
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function() {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            document.getElementById("musicToggle").innerText = `⏸ Pause Music (${songs[randomSongIndex].title})`;
+        }
+    }, { once: true });
+});
 
 // Create song selection dropdown
 const songSelect = document.createElement("select");
@@ -158,28 +169,21 @@ songSelect.style.zIndex = "1000";
 songSelect.addEventListener("change", function() {
     bgMusic.src = songs[this.value].url;
     bgMusic.play();
-    document.getElementById("musicToggle").innerText = "⏸ Pause Music";
+    document.getElementById("musicToggle").innerText = `⏸ Pause Music (${songs[this.value].title})`;
 });
 
+// Music toggle button
 document.getElementById("musicToggle").addEventListener("click", function() {
     if (bgMusic.paused) {
         bgMusic.play();
-        this.innerText = "⏸ Pause Music";
+        this.innerText = `⏸ Pause Music (${songs[songSelect.value].title})`;
     } else {
         bgMusic.pause();
         this.innerText = "🎵 Play Music";
     }
 });
 
-// Auto-play music when the website is opened
-window.addEventListener("load", function() {
-    bgMusic.src = songs[0].url; // Default to the first song
-    bgMusic.play().then(() => {
-        document.getElementById("musicToggle").innerText = "⏸ Pause Music";
-    }).catch((error) => {
-        console.log("Autoplay was prevented:", error);
-    });
-});
+
 
 
 const images = ["firstImage", "secondImage"];
