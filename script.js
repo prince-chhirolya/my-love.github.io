@@ -1,110 +1,3 @@
-// Theme Toggle
-document.getElementById("themeToggle").addEventListener("click", function() {
-    document.body.classList.toggle("dark-mode");
-    this.innerText = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
-});
-
-// Falling Hearts Effect
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-
-    let size = Math.random() * 20 + 10; 
-    heart.style.fontSize = size + "px";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 3 + 3 + "s"; 
-
-    document.getElementById("heartsContainer").appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
-}
-
-setInterval(createHeart, 300);
-
-// Love Letter Modal
-document.getElementById("openLetter").addEventListener("click", function() {
-    let modal = document.getElementById("letterModal");
-    modal.classList.add("show-modal");
-});
-
-document.getElementById("closeLetter").addEventListener("click", function() {
-    let modal = document.getElementById("letterModal");
-    modal.classList.remove("show-modal");
-});
-
-// Virtual Hug Button
-document.getElementById("hugButton").addEventListener("click", function() {
-    if (!this.clicked) {
-        this.clicked = true;
-        
-        // Create and show the hug gif
-        const hugGif = document.createElement("img");
-        hugGif.src = "https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif"; // Replace with your favorite hugging gif URL
-        hugGif.classList.add("hug-gif");
-        hugGif.style.position = "fixed";
-        hugGif.style.top = "50%";
-        hugGif.style.left = "50%";
-        hugGif.style.transform = "translate(-50%, -50%)";
-        hugGif.style.zIndex = "1000";
-        document.body.appendChild(hugGif);
-
-        // Add light red neon light border to the gif
-        hugGif.style.border = "5px solid lightcoral";
-        hugGif.style.boxShadow = "0 0 20px lightcoral, 0 0 30px lightcoral, 0 0 40px lightcoral, 0 0 50px lightcoral";
-
-        // Create and show the red heart
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "❤️";
-        heart.style.position = "fixed";
-        heart.style.top = "10%";
-        heart.style.left = "50%";
-        heart.style.transform = "translateX(-50%)";
-        heart.style.fontSize = "50px";
-        heart.style.zIndex = "1000";
-        document.body.appendChild(heart);
-
-        // Play romantic music if not already playing
-        if (bgMusic.paused) {
-            bgMusic.play();
-            document.getElementById("musicToggle").innerText = "⏸ Pause Music";
-        }
-
-        // Remove the gif and heart after 3 seconds
-        setTimeout(() => {
-            hugGif.remove();
-            heart.remove();
-            this.clicked = false;
-        }, 3000);
-    }
-});
-
-// Daily Love Quotes
-const quotes = [
-    "You are my sunshine, my only sunshine! ☀️💖",
-    "Every love story is beautiful, but ours is my favorite. 💑✨",
-    "I love you not only for what you are, but for what I am when I am with you. 💕",
-    "You make my heart smile. 😊❤️",
-    "You’re the best thing that ever happened to me! 💘"
-];
-
-function displayQuote() {
-    let quoteElement = document.getElementById("loveQuote");
-    let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
-    quoteElement.style.opacity = 0;
-    setTimeout(() => {
-        quoteElement.innerText = randomQuote;
-        quoteElement.style.opacity = 1;
-    }, 500);
-}
-
-setInterval(displayQuote, 10000);
-displayQuote();
-
 // Background Music Control with Romantic Hindi Bollywood Songs
 const songs = [
     { title: "Tum Ho Pass Mere", url: "music/tum-ho-pass-mere.mp3" },
@@ -135,6 +28,12 @@ songs.forEach((song, index) => {
 });
 document.body.appendChild(songSelect);
 
+// Style the song selection dropdown to be fixed on the right, but not at the top
+songSelect.style.position = "fixed";
+songSelect.style.bottom = "20px";
+songSelect.style.right = "10px";
+songSelect.style.zIndex = "1000";
+
 // Change song based on selection
 songSelect.addEventListener("change", function() {
     bgMusic.src = songs[this.value].url;
@@ -155,11 +54,35 @@ document.getElementById("musicToggle").addEventListener("click", function() {
 // Auto-play music when the website is opened
 window.addEventListener("load", function() {
     bgMusic.src = songs[0].url; // Default to the first song
-    document.body.addEventListener("click", function() {
-        bgMusic.play().then(() => {
+    bgMusic.play().then(() => {
+        document.getElementById("musicToggle").innerText = "⏸ Pause Music";
+    }).catch((error) => {
+        console.log("Autoplay was prevented:", error);
+    });
+
+    // Start music on click anywhere
+    const playMusicOnClick = function() {
+        if (bgMusic.paused) {
+            bgMusic.play();
             document.getElementById("musicToggle").innerText = "⏸ Pause Music";
-        }).catch((error) => {
-            console.log("Autoplay was prevented:", error);
-        });
-    }, { once: true });
+            document.body.removeEventListener("click", playMusicOnClick);
+            window.removeEventListener("scroll", playMusicOnScroll);
+        }
+    };
+
+    // Start music on scroll
+    const playMusicOnScroll = function() {
+        if (bgMusic.paused) {
+            bgMusic.play().then(() => {
+                document.getElementById("musicToggle").innerText = "⏸ Pause Music";
+                window.removeEventListener("scroll", playMusicOnScroll);
+                document.body.removeEventListener("click", playMusicOnClick);
+            }).catch((error) => {
+                console.log("Autoplay was prevented:", error);
+            });
+        }
+    };
+
+    document.body.addEventListener("click", playMusicOnClick);
+    window.addEventListener("scroll", playMusicOnScroll);
 });
