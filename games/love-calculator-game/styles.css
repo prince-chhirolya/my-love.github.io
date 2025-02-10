@@ -1,0 +1,122 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    padding: 20px;
+}
+
+/* Love Calculator Section */
+.love-calculator {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    width: 350px;
+    margin: 50px auto;
+    box-shadow: 0 4px 10px rgba(255, 0, 102, 0.2);
+}
+
+.love-calculator h2 {
+    font-size: 24px;
+    color: #ff3366;
+}
+
+/* Input Fields */
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Love Button */
+#calculateLove {
+    background: linear-gradient(135deg, #ff4081, #ff6699);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+#calculateLove:hover {
+    background: linear-gradient(135deg, #ff6699, #ff4081);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff99c8;
+}
+
+/* Result Display */
+#result {
+    font-size: 22px;
+    margin-top: 20px;
+    color: #fff;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Love Meter */
+#love-meter-container {
+    width: 80%;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    margin: 20px auto;
+    overflow: hidden;
+    display: none;
+}
+
+#love-meter {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(135deg, #ff4081, #ff6699);
+    transition: width 2s ease-in-out;
+}
+
+/* Share Button */
+#shareResult {
+    background: linear-gradient(135deg, #ff3366, #ff6699);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#shareResult:hover {
+    transform: scale(1.1);
+}
+
+/* Falling Hearts Animation */
+@keyframes fall {
+    0% { transform: translateY(-10px); opacity: 0; }
+    100% { transform: translateY(100vh); opacity: 1; }
+}
+
+#hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    color: #ff4081;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+.hidden {
+    display: none;
+}

@@ -214,7 +214,7 @@ function startGame2() {
 }
 
 function startGame3() {
-    alert("Game 3 coming soon! 🎮");
+    window.location.href = "games/love-calculator-game/index.html";
 }
 
 function startGame4() {
